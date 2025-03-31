@@ -18,6 +18,7 @@ function CommonForm({
   buttonText,
   isBtnDisabled,
 }) {
+  // Function to render different types of input components based on the control type
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
@@ -39,7 +40,6 @@ function CommonForm({
             }
           />
         );
-
         break;
       case "select":
         element = (
@@ -66,7 +66,6 @@ function CommonForm({
             </SelectContent>
           </Select>
         );
-
         break;
       case "textarea":
         element = (
@@ -83,9 +82,7 @@ function CommonForm({
             }
           />
         );
-
         break;
-
       default:
         element = (
           <Input
@@ -108,8 +105,17 @@ function CommonForm({
     return element;
   }
 
+  // Handle form submission, prevent default form submission, and call onSubmit
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent form reload
+
+    if (onSubmit) {
+      onSubmit(e); // Pass the event to parent component's onSubmit function
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
           <div className="grid w-full gap-1.5" key={controlItem.name}>

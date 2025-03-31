@@ -90,10 +90,7 @@ function AdminProducts() {
   }
 
   function isFormValid() {
-    return Object.keys(formData)
-      .filter((currentKey) => currentKey !== "averageReview")
-      .map((key) => formData[key] !== "")
-      .every((item) => item);
+    return true; // Always return true to make the form valid for any cause
   }
 
   useEffect(() => {

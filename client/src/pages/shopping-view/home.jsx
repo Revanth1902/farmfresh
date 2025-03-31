@@ -1,21 +1,15 @@
 import { Button } from "@/components/ui/button";
-import bannerOne from "../../assets/banner-1.webp";
-import bannerTwo from "../../assets/banner-2.webp";
-import bannerThree from "../../assets/banner-3.webp";
 import {
   Airplay,
-  BabyIcon,
+  CloudLightning,
   ChevronLeftIcon,
   ChevronRightIcon,
-  CloudLightning,
-  Heater,
-  Images,
-  Shirt,
-  ShirtIcon,
+  Leaf,
   ShoppingBasket,
-  UmbrellaIcon,
-  WashingMachine,
-  WatchIcon,
+  Tractor,
+  Package,
+  Sun,
+  Star,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -31,22 +25,25 @@ import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 
+// Updated Categories for Organic Foods with Star replacing Honeycomb
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "vegetables", label: "Vegetables", icon: Leaf },
+  { id: "fruits", label: "Fruits", icon: Sun },
+  { id: "dairy", label: "Dairy", icon: Package },
+  { id: "honey", label: "Honey", icon: Star }, // Star for Honey
+  { id: "spices", label: "Spices", icon: ShoppingBasket },
+  { id: "grains", label: "Grains", icon: Tractor },
+  { id: "oils", label: "Oils", icon: CloudLightning },
+  { id: "rice", label: "Rice", icon: Airplay },
 ];
 
 const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
+  { id: "organic-brand", label: "Organic Brand", icon: Leaf },
+  { id: "local-farm", label: "Local Farm", icon: Tractor },
+  { id: "pure-honey", label: "Pure Honey", icon: Star },
+  { id: "eco-grains", label: "Eco Grains", icon: ShoppingBasket },
 ];
+
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector(
@@ -62,6 +59,9 @@ function ShoppingHome() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Banner image URL
+  const bannerImageUrl =
+    "https://img.freepik.com/premium-photo/vegan-food-banner-fresh-vegetables-fruits-berries-white-wooden-background-free-space-your-text_187166-45886.jpg";
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
     const currentFilter = {
@@ -99,7 +99,9 @@ function ShoppingHome() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
+      setCurrentSlide(
+        (prevSlide) => (prevSlide + 1) % featureImageList?.length
+      ); // Use optional chaining to prevent errors
     }, 15000);
 
     return () => clearInterval(timer);
@@ -114,26 +116,20 @@ function ShoppingHome() {
     );
   }, [dispatch]);
 
-  console.log(productList, "productList");
-
   useEffect(() => {
     dispatch(getFeatureImages());
   }, [dispatch]);
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Banner Section */}
       <div className="relative w-full h-[600px] overflow-hidden">
-        {featureImageList && featureImageList.length > 0
-          ? featureImageList.map((slide, index) => (
-              <img
-                src={slide?.image}
-                key={index}
-                className={`${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-              />
-            ))
-          : null}
+        {/* Add static banner */}
+        <img
+          src={bannerImageUrl}
+          alt="Fiber-rich Foods"
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-80 transition-opacity duration-1000"
+        />
         <Button
           variant="outline"
           size="icon"
@@ -160,11 +156,25 @@ function ShoppingHome() {
         >
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
+        {/* Feature Image Rotator */}
+        {featureImageList && featureImageList.length > 0
+          ? featureImageList.map((slide, index) => (
+              <img
+                src={slide?.image}
+                key={index}
+                className={`${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+              />
+            ))
+          : null}
       </div>
+
+      {/* Category Section for Organic Foods */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            Shop by category
+            Shop by Category
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categoriesWithIcon.map((categoryItem) => (
@@ -184,6 +194,7 @@ function ShoppingHome() {
         </div>
       </section>
 
+      {/* Brand Section for Organic Food Brands */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
@@ -203,10 +214,11 @@ function ShoppingHome() {
         </div>
       </section>
 
+      {/* Featured Products Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
-            Feature Products
+            Featured Organic Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {productList && productList.length > 0
@@ -221,6 +233,8 @@ function ShoppingHome() {
           </div>
         </div>
       </section>
+
+      {/* Product Details Dialog */}
       <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}

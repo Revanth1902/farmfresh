@@ -41,11 +41,11 @@ export const loginFormControls = [
 
 export const addProductFormElements = [
   {
-    label: "Title",
-    name: "title",
+    label: "Product Name",
+    name: "productName",
     componentType: "input",
     type: "text",
-    placeholder: "Enter product title",
+    placeholder: "Enter product name (e.g., Rice, Honey)",
   },
   {
     label: "Description",
@@ -58,11 +58,14 @@ export const addProductFormElements = [
     name: "category",
     componentType: "select",
     options: [
-      { id: "men", label: "Men" },
-      { id: "women", label: "Women" },
-      { id: "kids", label: "Kids" },
-      { id: "accessories", label: "Accessories" },
-      { id: "footwear", label: "Footwear" },
+      { id: "rice", label: "Rice" },
+      { id: "dairy", label: "Dairy" },
+      { id: "vegetables", label: "Vegetables" },
+      { id: "fruits", label: "Fruits" },
+      { id: "honey", label: "Honey" },
+      { id: "spices", label: "Spices" },
+      { id: "grains", label: "Grains" },
+      { id: "oils", label: "Oils" },
     ],
   },
   {
@@ -70,12 +73,10 @@ export const addProductFormElements = [
     name: "brand",
     componentType: "select",
     options: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
+      { id: "organicFarm", label: "Organic Farm" },
+      { id: "greenValley", label: "Green Valley" },
+      { id: "freshHarvest", label: "Fresh Harvest" },
+      { id: "earthEssence", label: "Earth Essence" },
     ],
   },
   {
@@ -85,6 +86,14 @@ export const addProductFormElements = [
     type: "number",
     placeholder: "Enter product price",
   },
+  {
+    label: "Discounted Price",
+    name: "discountedPrice",
+    componentType: "input",
+    type: "number",
+    placeholder: "Enter discounted price (optional)",
+  },
+
   {
     label: "Sale Price",
     name: "salePrice",
@@ -97,7 +106,14 @@ export const addProductFormElements = [
     name: "totalStock",
     componentType: "input",
     type: "number",
-    placeholder: "Enter total stock",
+    placeholder: "Enter total stock available",
+  },
+  {
+    label: "Average Review",
+    name: "averageReview",
+    componentType: "input",
+    type: "number",
+    placeholder: "Enter average review score",
   },
 ];
 
@@ -113,28 +129,43 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing",
   },
   {
-    id: "men",
-    label: "Men",
+    id: "rice",
+    label: "Rice",
     path: "/shop/listing",
   },
   {
-    id: "women",
-    label: "Women",
+    id: "dairy",
+    label: "Dairy",
     path: "/shop/listing",
   },
   {
-    id: "kids",
-    label: "Kids",
+    id: "vegetables",
+    label: "Vegetables",
     path: "/shop/listing",
   },
   {
-    id: "footwear",
-    label: "Footwear",
+    id: "fruits",
+    label: "Fruits",
     path: "/shop/listing",
   },
   {
-    id: "accessories",
-    label: "Accessories",
+    id: "honey",
+    label: "Honey",
+    path: "/shop/listing",
+  },
+  {
+    id: "spices",
+    label: "Spices",
+    path: "/shop/listing",
+  },
+  {
+    id: "grains",
+    label: "Grains",
+    path: "/shop/listing",
+  },
+  {
+    id: "oils",
+    label: "Oils",
     path: "/shop/listing",
   },
   {
@@ -145,37 +176,39 @@ export const shoppingViewHeaderMenuItems = [
 ];
 
 export const categoryOptionsMap = {
-  men: "Men",
-  women: "Women",
-  kids: "Kids",
-  accessories: "Accessories",
-  footwear: "Footwear",
+  rice: "Rice",
+  dairy: "Dairy",
+  vegetables: "Vegetables",
+  fruits: "Fruits",
+  honey: "Honey",
+  spices: "Spices",
+  grains: "Grains",
+  oils: "Oils",
 };
 
 export const brandOptionsMap = {
-  nike: "Nike",
-  adidas: "Adidas",
-  puma: "Puma",
-  levi: "Levi",
-  zara: "Zara",
-  "h&m": "H&M",
+  organicFarm: "Organic Farm",
+  greenValley: "Green Valley",
+  freshHarvest: "Fresh Harvest",
+  earthEssence: "Earth Essence",
 };
 
 export const filterOptions = {
   category: [
-    { id: "men", label: "Men" },
-    { id: "women", label: "Women" },
-    { id: "kids", label: "Kids" },
-    { id: "accessories", label: "Accessories" },
-    { id: "footwear", label: "Footwear" },
+    { id: "rice", label: "Rice" },
+    { id: "dairy", label: "Dairy" },
+    { id: "vegetables", label: "Vegetables" },
+    { id: "fruits", label: "Fruits" },
+    { id: "honey", label: "Honey" },
+    { id: "spices", label: "Spices" },
+    { id: "grains", label: "Grains" },
+    { id: "oils", label: "Oils" },
   ],
   brand: [
-    { id: "nike", label: "Nike" },
-    { id: "adidas", label: "Adidas" },
-    { id: "puma", label: "Puma" },
-    { id: "levi", label: "Levi's" },
-    { id: "zara", label: "Zara" },
-    { id: "h&m", label: "H&M" },
+    { id: "organicFarm", label: "Organic Farm" },
+    { id: "greenValley", label: "Green Valley" },
+    { id: "freshHarvest", label: "Fresh Harvest" },
+    { id: "earthEssence", label: "Earth Essence" },
   ],
 };
 
