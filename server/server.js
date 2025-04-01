@@ -31,7 +31,19 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "https://farmfresh-gilt.vercel.app/" || " http://localhost:5173/",
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://farmfresh-gilt.vercel.app", // production
+        "http://localhost:5173", // development
+      ];
+
+      if (allowedOrigins.includes(origin) || !origin) {
+        // Allow requests with no origin (e.g., mobile apps or Postman)
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -40,7 +52,7 @@ app.use(
       "Expires",
       "Pragma",
     ],
-    credentials: true,
+    credentials: true, // Allows cookies to be sent with requests
   })
 );
 
