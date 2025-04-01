@@ -33,7 +33,7 @@ app.use(
   cors({
     origin: (origin, callback) => {
       const allowedOrigins = [
-        "https://farmfresh-4wye.onrender.com", // production
+        "https://farmfresh-gilt.vercel.app", // production
         "http://localhost:5173", // development
       ];
 
